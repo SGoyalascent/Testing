@@ -44,13 +44,17 @@ int main() {
                                     "130.255.77.156",   
                                     "209.205.66.24" };
 
-    memcpy(buffer,buffer_echo,MAXLINE);	
+    
     if ( (sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
         perror("socket creation failed");
         exit(EXIT_FAILURE);
     }
     
     for(int k = 0; k < 25; k++) {
+        
+        memcpy(buffer,buffer_echo,MAXLINE);	
+        buffer[2] = k;
+        
         memset(&servaddr, 0, sizeof(servaddr));
         servaddr.sin_family = AF_INET;
         servaddr.sin_port = htons(port_no);
