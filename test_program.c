@@ -62,7 +62,7 @@ int main() {
             if(buffer[i]==62 && buffer[i-1]==62){
                 break;	}
         }
-        printf("Len = %d\n", len);
+        printf("len_%d = %d\n",k, len);
 
         sendto(sockfd, (const char *)buffer, len,
             MSG_CONFIRM, (const struct sockaddr *) &servaddr, 
@@ -70,7 +70,7 @@ int main() {
         n = recvfrom(sockfd, (char *)recv_buffer, MAXLINE, 
                     MSG_WAITALL, (struct sockaddr *) &servaddr,
                     &len);
-        printf("n: %d\n", n);
+        printf("recv_n_%d: %d\n",k, n);
 
         for(int i=0;i<n;i++){	
             printf("%d,", recv_buffer[i]);
