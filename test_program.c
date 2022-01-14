@@ -19,11 +19,11 @@ int main() {
     unsigned char buffer_echo[MAXLINE]={0,0,2,0,0,4,2,0,0,0,0,0,22,22,0,0,1,0x3E,0x3E};
 	struct sockaddr_in  servaddr;
 
-    char ip_address[1][256] = {"73.66.181.49"};
+    const char* ip_address[1] = {"73.66.181.49"};
     int port_no = 18000;
 
     char ip[25][256];
-
+/*
     FILE *myfile = fopen("legacy.txt", "r");
     if(myfile == NULL) {
         printf("file not found\n");
@@ -33,7 +33,7 @@ int main() {
         printf("ip_%d = %s\n", i, ip[i]);
     }
     fclose(myfile);
-/*
+*/
     memcpy(buffer,buffer_echo,MAXLINE);	
 
     if ( (sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
@@ -67,6 +67,6 @@ int main() {
     }
     printf("\n");
     close(sockfd);
-    */
+
     return 0;
 }
