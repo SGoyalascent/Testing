@@ -1,0 +1,25 @@
+legacy_ip :- 94.130.179.247    
+legacy_ip :- 185.83.253.56     
+legacy_ip :- 139.99.155.124    
+legacy_ip :- 116.203.157.233   
+legacy_ip :- 95.183.51.104     
+legacy_ip :- 52.231.186.123    
+legacy_ip :- 45.12.222.138     
+legacy_ip :- 54.36.163.57     
+legacy_ip :- 13.234.55.11     
+legacy_ip :- 13.233.223.167    
+legacy ip :- 134.122.54.207    
+legacy ip :- 73.66.181.49     
+legacy ip :- 152.67.17.219     
+legacy ip :- 104.194.248.208   
+legacy ip :- 188.120.241.103   
+legacy ip :- 185.37.61.73     
+legacy ip :- 193.7.195.250     
+legacy ip :- 104.128.190.188   
+legacy ip :- 73.12.182.221     
+legacy ip :- 190.105.220.72    
+legacy ip :- 95.179.220.72     
+legacy ip :- 13.127.254.246    
+legacy ip :- 104.207.148.199   
+legacy ip :- 130.255.77.156    
+legacy ip :- 209.205.66.24   
