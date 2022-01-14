@@ -14,7 +14,7 @@
 int main() {
     int sockfd;
     unsigned char buffer[MAXLINE], recv_buffer[MAXLINE];	
-    unsigned char buffer_echo[MAXLINE]={0,0,2,0,0,4,2,0,0,0,0,0,22,22,0,0,0,0,0,0,0,0,0x3E,0x3E};
+    unsigned char buffer_echo[MAXLINE]={0,0,2,0,0,4,2,0,0,0,0,0,22,22,0,1,0,0,0,0,0,0,0x3E,0x3E};
 	struct sockaddr_in  servaddr;
     int port_no = 18000;
 
