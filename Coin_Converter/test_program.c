@@ -171,6 +171,9 @@ int main() {
         else if (recv_buffer[2] == 251){
             printf("RAIDA-%d: NOT_RUNNING\n", k);
         }
+        else {
+            printf("ERROR\n");
+        }
     
         close(sockfd);
     }
