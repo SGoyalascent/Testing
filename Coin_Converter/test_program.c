@@ -99,21 +99,17 @@ int main() {
                                     "130.255.77.156",   
                                     "209.205.66.24" };
 
-    
-    
-    memcpy(buffer,buffer_echo,MAXLINE);	
-
     getexepath();
 
     for(int k = 0; k < 25; k++) {
         
-        printf("Raida-%d\n", k);
-        
+        printf("RAIDA-%d\n", k);
         if ( (sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
             perror("socket creation failed");
             exit(EXIT_FAILURE);
         }
         
+        memcpy(buffer,buffer_echo,MAXLINE);	
         buffer[2] = k;  //raida_no
 
         memset(&servaddr, 0, sizeof(servaddr));
@@ -127,7 +123,7 @@ int main() {
             if(buffer[i]==62 && buffer[i-1]==62){
                 break;}
         }
-        printf("len_%d = %d",k, len);
+        printf("sent_len = %d\n",len);
 
 //----------------------------------------------------------
 //Loads encrypt key from encryption_key.bin
@@ -155,15 +151,14 @@ int main() {
 
         int status  = load_encrypt_key();
         crypt_ctr(key,req_ptr,send_req,iv);
-        printf("SENDING\n");
+
         sendto(sockfd, (const char *)buffer, len,
             MSG_CONFIRM, (const struct sockaddr *) &servaddr, 
                 sizeof(servaddr));
-        printf("SENT\n");
         n = recvfrom(sockfd, (char *)recv_buffer, MAXLINE, 
                     MSG_WAITALL, (struct sockaddr *) &servaddr,
                     &len);
-        printf("  recv_n_%d: %d\n",k, n);
+        printf("recv_n: %d\n", n);
 
         for(int i=0;i<n;i++){	
             printf("%d,", recv_buffer[i]);
