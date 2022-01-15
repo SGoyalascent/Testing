@@ -100,15 +100,19 @@ int main() {
                                     "209.205.66.24" };
 
     
-    if ( (sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
-        perror("socket creation failed");
-        exit(EXIT_FAILURE);
-    }
+    
     memcpy(buffer,buffer_echo,MAXLINE);	
 
     getexepath();
 
     for(int k = 0; k < 25; k++) {
+        
+        printf("Raida-%d\n", k);
+        
+        if ( (sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
+            perror("socket creation failed");
+            exit(EXIT_FAILURE);
+        }
         
         buffer[2] = k;  //raida_no
 
@@ -151,10 +155,11 @@ int main() {
 
         int status  = load_encrypt_key();
         crypt_ctr(key,req_ptr,send_req,iv);
-
+        printf("SENDING\n");
         sendto(sockfd, (const char *)buffer, len,
             MSG_CONFIRM, (const struct sockaddr *) &servaddr, 
                 sizeof(servaddr));
+        printf("SENT\n");
         n = recvfrom(sockfd, (char *)recv_buffer, MAXLINE, 
                     MSG_WAITALL, (struct sockaddr *) &servaddr,
                     &len);
@@ -168,11 +173,12 @@ int main() {
         if(recv_buffer[2] == 250) {
             printf("RAIDA-%d: RUNNING\n", k);
         }
-        else {
+        else if (recv_buffer[2] == 251){
             printf("RAIDA-%d: NOT_RUNNING\n", k);
         }
+    
+        close(sockfd);
     }
-    close(sockfd);
 
     return 0;
 }
