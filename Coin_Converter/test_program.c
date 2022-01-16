@@ -125,6 +125,11 @@ int main() {
         }
         printf("sent_len = %d\n",len);
 
+        printf("buffer_before: ")
+        for(int i=0;i<n;i++){	
+            printf("%d,", buffer[i]);
+        }
+        printf("\n");
 //----------------------------------------------------------
 //Loads encrypt key from encryption_key.bin
 //---------------------------------------------------------
@@ -152,6 +157,11 @@ int main() {
         int status  = load_encrypt_key();
         crypt_ctr(key,req_ptr,send_req,iv);
 
+        printf("buffer_after: ")
+        for(int i=0;i<n;i++){	
+            printf("%d,", buffer[i]);
+        }
+        printf("\n");
         sendto(sockfd, (const char *)buffer, len,
             MSG_CONFIRM, (const struct sockaddr *) &servaddr, 
                 sizeof(servaddr));
