@@ -117,7 +117,8 @@ int main() {
 
     for(int k = 0; k < 25; k++) {
         
-        printf("RAIDA-%d\n", k);
+        printf("----------RAIDA-%d---------------\n", k);
+
         if ( (sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
             perror("socket creation failed");
             exit(EXIT_FAILURE);
@@ -137,13 +138,8 @@ int main() {
             if(buffer[i]==62 && buffer[i-1]==62){
                 break;}
         }
-        printf("sent_len = %d\n",len);
+        //printf("sent_len = %d\n",len);
 
-        printf("buffer_before: ");
-        for(int i=0;i<len;i++){	
-            printf("%d,", buffer[i]);
-        }
-        printf("\n");
 //----------------------------------------------------------
 //Loads encrypt key from encryption_key.bin
 //---------------------------------------------------------
@@ -171,43 +167,21 @@ int main() {
         int status  = load_encrypt_key();
         crypt_ctr(key,req_ptr,send_req,iv);
 
-        printf("buffer_after: ");
-        for(int i=0;i<len;i++){	
-            printf("%d,", buffer[i]);
-        }
-        printf("\n");
-        printf("----Sending------");
-        sendto(sockfd, (const char *)buffer, len,
-            MSG_CONFIRM, (const struct sockaddr *) &servaddr, 
-                sizeof(servaddr));
-        printf("----Sent and Waiting------\n");
+//-------------------------------------------------------------------
+
+        sendto(sockfd, (const char *)buffer, len, MSG_CONFIRM, (const struct sockaddr *) &servaddr, sizeof(servaddr));
 
         set_time_out(FRAME_TIME_OUT_SECS);
         if (select(32, &select_fds, NULL, NULL, &timeout) == 0 ){
-            printf("Time out error \n"); }
-        else {
-            n = recvfrom(sockfd, (char *)recv_buffer, MAXLINE, 
-                        MSG_WAITALL, (struct sockaddr *) &servaddr,
-                        &len);
-            printf("--------Received----------\n");
-        }
-        printf("recv_n: %d\n", n);
-
-        for(int i=0;i<n;i++){	
-            printf("%d,", recv_buffer[i]);
-        }
-        printf("\n");
-
-        if(recv_buffer[2] == 250) {
-            printf("RAIDA-%d: RUNNING\n", k);
-        }
-        else if (recv_buffer[2] == 251){
-            printf("RAIDA-%d: NOT_RUNNING\n", k);
+            printf("Time out error \n"); 
+            printf("STATUS: FAIL\n");
+            continue;    
         }
         else {
-            printf("ERROR\n");
+            n = recvfrom(sockfd, (char *)recv_buffer, MAXLINE, MSG_WAITALL, (struct sockaddr *) &servaddr, &len);
+            printf("STATUS: SUCCESS\n", k);
         }
-    
+        //printf("recv_n: %d\n", n);
         close(sockfd);
     }
 
