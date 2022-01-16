@@ -117,7 +117,7 @@ int main() {
 
     for(int k = 0; k < 25; k++) {
         
-        printf("----------RAIDA-%d---------------\n", k);
+        printf("----------RAIDA-%d----", k);
 
         if ( (sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
             perror("socket creation failed");
@@ -173,13 +173,13 @@ int main() {
 
         set_time_out(FRAME_TIME_OUT_SECS);
         if (select(32, &select_fds, NULL, NULL, &timeout) == 0 ){
-            printf("Time out error \n"); 
+            //printf("Time out error \n"); 
             printf("STATUS: FAIL\n");
             continue;    
         }
         else {
             n = recvfrom(sockfd, (char *)recv_buffer, MAXLINE, MSG_WAITALL, (struct sockaddr *) &servaddr, &len);
-            printf("STATUS: SUCCESS\n", k);
+            printf("STATUS: SUCCESS\n");
         }
         //printf("recv_n: %d\n", n);
         close(sockfd);
