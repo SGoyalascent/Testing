@@ -13,6 +13,8 @@
 #define MAXLINE 1024
 #define ENCRYPTION_CONFIG_BYTES  16
 #define NOUNCE_BYTES_CNT         8
+#define FRAME_TIME_OUT_SECS		1 
+
 #define REQ_NO_1  				9
 #define REQ_NO_2  				10
 #define REQ_NO_3  				11
@@ -25,6 +27,9 @@
 uint8_t encrypt_key[ENCRYPTION_CONFIG_BYTES];
 uint8_t nounce[NOUNCE_BYTES_CNT];
 char execpath[256];
+int sockfd;
+fd_set select_fds;  
+struct timeval timeout;
 
 void getexepath()
 {
@@ -66,8 +71,17 @@ int load_encrypt_key(){
 	return 0;
 }
 
+//-----------------------------------------------------------
+//Set time out for UDP frames
+//-----------------------------------------------------------
+void set_time_out(unsigned char secs){     
+	FD_ZERO(&select_fds);            
+	FD_SET(sockfd, &select_fds);           	                                  
+	timeout.tv_sec = secs; 
+	timeout.tv_usec = 0;
+}
+
 int main() {
-    int sockfd;
     unsigned char buffer[MAXLINE], recv_buffer[MAXLINE];	
     unsigned char buffer_echo[MAXLINE]={0,0,2,0,0,4,2,0,0,0,0,0,22,22,0,1,0,0,0,0,0,0,0x3E,0x3E};
 	struct sockaddr_in  servaddr;
@@ -125,8 +139,8 @@ int main() {
         }
         printf("sent_len = %d\n",len);
 
-        printf("buffer_before: ")
-        for(int i=0;i<n;i++){	
+        printf("buffer_before: ");
+        for(int i=0;i<len;i++){	
             printf("%d,", buffer[i]);
         }
         printf("\n");
@@ -157,17 +171,26 @@ int main() {
         int status  = load_encrypt_key();
         crypt_ctr(key,req_ptr,send_req,iv);
 
-        printf("buffer_after: ")
-        for(int i=0;i<n;i++){	
+        printf("buffer_after: ");
+        for(int i=0;i<len;i++){	
             printf("%d,", buffer[i]);
         }
         printf("\n");
+        printf("----Sending------");
         sendto(sockfd, (const char *)buffer, len,
             MSG_CONFIRM, (const struct sockaddr *) &servaddr, 
                 sizeof(servaddr));
-        n = recvfrom(sockfd, (char *)recv_buffer, MAXLINE, 
-                    MSG_WAITALL, (struct sockaddr *) &servaddr,
-                    &len);
+        printf("----Sent and Waiting------\n");
+
+        set_time_out(FRAME_TIME_OUT_SECS);
+        if (select(32, &select_fds, NULL, NULL, &timeout) == 0 ){
+            printf("Time out error \n"); }
+        else {
+            n = recvfrom(sockfd, (char *)recv_buffer, MAXLINE, 
+                        MSG_WAITALL, (struct sockaddr *) &servaddr,
+                        &len);
+            printf("--------Received----------\n");
+        }
         printf("recv_n: %d\n", n);
 
         for(int i=0;i<n;i++){	
