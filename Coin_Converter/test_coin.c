@@ -117,7 +117,7 @@ int main() {
 
     for(int k = 0; k < 25; k++) {
         
-        printf("--->RAIDA-%d >> ", k);
+        printf("->RAIDA-%d >> ", k);
 
         if ( (sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
             perror("socket creation failed");
