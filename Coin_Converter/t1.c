@@ -36,9 +36,9 @@ int main() {
     unsigned char buff[24];
     char path[256];
     strcpy(path,execpath);
-    strcat(path,"raida_no.txt");
+    strcat(path,"/raida_no.txt");
     if ((fp_inp = fopen(path, "r")) == NULL) {
-        printf("raida_no.txt Cannot be opened , exiting \n");
+        printf("raida_1 Cannot be opened , exiting \n");
     }
     while( ( ch = fgetc(fp_inp) ) != EOF ){
         size++;
@@ -55,27 +55,27 @@ int main() {
         raida_1=buff[0]-48;
     }
 
-    printf("Raida_1 :- %d \n", raida_1);
+    printf("Raida_1 :- %d \n", raida_1);  //238
     fclose(fp_inp);
 
     FILE *myfile = fopen(path, "r");
     if(myfile == NULL) {
-         printf("raida_no.txt Cannot be opened , exiting \n");
+         printf("raida2 Cannot be opened , exiting \n");
     }
     fscanf(myfile, "%255s", &raida_2);
     fclose(myfile);
 
-    printf("Raida_2 :- %c \n", raida_2);
-    printf("Raida_3 :- %d \n", raida_2);
+    printf("Raida_2 :- %c \n", raida_2);  //2
+    printf("Raida_3 :- %d \n", raida_2-48);  // 50
 
-    FILE *myfile = fopen(path, "r");
-    if(myfile == NULL) {
-         printf("raida_no.txt Cannot be opened , exiting \n");
+    FILE *myfil = fopen(path, "r");
+    if(myfil == NULL) {
+         printf("raida_no4 Cannot be opened , exiting \n");
     }
-    fscanf(myfile, "%d", &raida);
-    fclose(myfile);
+    fscanf(myfil, "%d", &raida);
+    fclose(myfil);
 
-    printf("Raida_4 :- %d \n", raida);
+    printf("Raida_4 :- %d \n", raida);   //2
 
 }
 
