@@ -37,6 +37,7 @@ int main() {
     char path[256];
     strcpy(path,execpath);
     strcat(path,"/raida_no.txt");
+    printf("path: %s\n", path);
     if ((fp_inp = fopen(path, "r")) == NULL) {
         printf("raida_1 Cannot be opened , exiting \n");
     }
@@ -55,7 +56,7 @@ int main() {
         raida_1=buff[0]-48;
     }
 
-    printf("Raida_1 :- %d \n", raida_1);  //238
+    printf("Raida_1 :- %d \n", raida_1); 
     fclose(fp_inp);
 
     FILE *myfile = fopen(path, "r");
@@ -65,8 +66,8 @@ int main() {
     fscanf(myfile, "%255s", &raida_2);
     fclose(myfile);
 
-    printf("Raida_2 :- %c \n", raida_2);  //2
-    printf("Raida_3 :- %d \n", raida_2-48);  // 50
+    printf("Raida_2 :- %c \n", raida_2); 
+    printf("Raida_3 :- %d \n", raida_2-48);  
 
     FILE *myfil = fopen(path, "r");
     if(myfil == NULL) {
@@ -75,7 +76,7 @@ int main() {
     fscanf(myfil, "%d", &raida);
     fclose(myfil);
 
-    printf("Raida_4 :- %d \n", raida);   //2
+    printf("Raida_4 :- %d \n", raida); 
 
 }
 
