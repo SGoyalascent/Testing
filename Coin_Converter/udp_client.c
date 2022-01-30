@@ -88,9 +88,9 @@ int load_encrypt_key(){
 int main() {
     int i=0;
     unsigned char buffer[MAXLINE], recv_buffer[MAXLINE];	
-    unsigned char buffer_version[MAXLINE]={0,0,2,0,0,15,2,0,0,0,0,0,22,22,0,1,1,0,0,0,0,0,0x3E,0x3E};
-    unsigned char buffer_echo[MAXLINE]={0,0,2,0,0,4,2,0,0,0,0,0,22,22,0,1,1,0,0,0,0,0,0x3E,0x3E};
-	unsigned char buffer_upgrade_coin[MAXLINE] = {0,0,2,0,0,215,0,0,0,0,0,0,22,22,0,1,0,0,0,0,0,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,
+    unsigned char buffer_version[MAXLINE]={0,0,1,0,0,15,2,0,0,0,0,0,22,22,0,1,1,0,0,0,0,0,0x3E,0x3E};
+    unsigned char buffer_echo[MAXLINE]={0,0,1,0,0,4,2,0,0,0,0,0,22,22,0,1,1,0,0,0,0,0,0x3E,0x3E};
+	unsigned char buffer_upgrade_coin[MAXLINE] = {0,0,1,0,0,215,0,0,0,0,0,0,22,22,0,1,0,0,0,0,0,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,
 										0x35, 0x81, 0xd9, 0xd6, 0x30, 0x1b, 0x4b, 0xc0, 0x48, 0x99, 0xad, 0xef, 0x3c, 0x7d, 0x25, 0xea, 0xd5, 0x51, 0xe2, 0x51, 0x5f, 0x38,
 										0x3E, 0x3E};
 /*
@@ -106,8 +106,8 @@ int main() {
 		struct sockaddr_in     servaddr;
 			
 	//   memcpy(buffer,buffer_version,MAXLINE);			
-		memcpy(buffer,buffer_echo,MAXLINE);	
-	//	memcpy(buffer, buffer_upgrade_coin, MAXLINE);
+	//	memcpy(buffer,buffer_echo,MAXLINE);	
+		memcpy(buffer, buffer_upgrade_coin, MAXLINE);
 
 	    // Creating socket file descriptor
 	    if ( (sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
@@ -123,7 +123,7 @@ int main() {
 	    servaddr.sin_family = AF_INET;
 	    servaddr.sin_port = htons(PORT);
 //	    servaddr.sin_addr.s_addr = INADDR_ANY;
-	   servaddr.sin_addr.s_addr = inet_addr("139.99.155.124");
+	   servaddr.sin_addr.s_addr = inet_addr("141.95.55.85");
 
 	      
 	    int n, len=0;
