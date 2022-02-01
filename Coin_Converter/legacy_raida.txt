@@ -10,14 +10,14 @@ Raida :- 8 	     legacy_ip :- 13.234.55.11         	 Port Number :- 18000
 Raida :- 9 	     legacy_ip :- 13.233.223.167          Port Number :- 18000
 Raida :- 10 	 legacy ip :- 134.122.54.207          Port Number :- 18000
 Raida :- 11 	 legacy ip :- 73.66.181.49         	 Port Number :- 18000
-Raida :- 12 	 legacy ip :- 152.67.17.219         	 Port Number :- 18000
+Raida :- 12 	 legacy ip :- 152.67.12.240         	 Port Number :- 18000
 Raida :- 13 	 legacy ip :- 104.194.248.208         Port Number :- 18000
 Raida :- 14 	 legacy ip :- 188.120.241.103         Port Number :- 18000
 Raida :- 15 	 legacy ip :- 185.37.61.73         	 Port Number :- 18000
 Raida :- 16 	 legacy ip :- 193.7.195.250         	 Port Number :- 18000
 Raida :- 17 	 legacy ip :- 104.128.190.188         Port Number :- 18000
 Raida :- 18 	 legacy ip :- 73.12.182.221         	 Port Number :- 18000
-Raida :- 19 	 legacy ip :- 190.105.220.72          Port Number :- 18000
+Raida :- 19 	 legacy ip :- 190.105.235.113          Port Number :- 18000
 Raida :- 20 	 legacy ip :- 95.179.220.72         	 Port Number :- 18000
 Raida :- 21 	 legacy ip :- 13.127.254.246          Port Number :- 18000
 Raida :- 22 	 legacy ip :- 104.207.148.199         Port Number :- 18000
